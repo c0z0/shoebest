@@ -1,0 +1,27 @@
+@import './config.sass'
+
+body
+	font-family: 'Open Sans', sans-serif
+	padding: 0
+	margin: 0
+
+.titleBar
+	background-color: #fff
+	color: $mainColor
+	font-family: 'Roboto Mono'
+	text-align: center
+	padding: $sPadding
+	margin: 0 $xlPadding
+	border: 1px solid $mainColor
+	margin-top: -$sPadding
+	border-top: none
+	border-bottom-left-radius: $sPadding
+	border-bottom-right-radius: $sPadding
+	transition: all .2s
+	cursor: pointer
+	&:hover
+		background-color: $mainColor
+		color: #fff
+	@media only screen and (min-width : 320px) and (max-width : 480px)
+		margin: 0 $sPadding
+

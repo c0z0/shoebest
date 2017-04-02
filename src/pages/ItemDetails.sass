@@ -1,0 +1,58 @@
+@import '../config.sass'
+
+.bg
+	background: $mainColor
+	min-height: 100vh
+	color: #fff
+	position: relative
+.img
+	width: 100%
+
+.fa-close
+	position: absolute
+	top: 16px
+	right: 16px
+	cursor: pointer
+	font-size: 150%
+
+.productTitle
+	font-family: 'Roboto Mono'
+	.price
+		float: right
+		font-weight: 700
+
+.buyButton
+	display: inline-block
+	background: #fff
+	color: $mainColor
+	padding: $sPadding
+	cursor: pointer
+	border-radius: $sPadding
+	border: 2px solid #fff
+	transition: all .2s
+	&:hover
+		color: #fff
+		background: $mainColor
+	float: right
+
+.quantity
+	margin-right: $mPadding
+
+.modifyButton
+	margin-right: $mPadding
+	display: inline-block
+	color: #fff
+	background: $mainColor
+	padding: $sPadding
+	cursor: pointer
+	border-radius: $sPadding
+	border: 2px solid #fff
+	transition: all .2s
+	&:hover
+		background: #fff
+		color: $mainColor
+.container
+	padding: $sPadding
+
+.descriptionText
+	text-align: justify

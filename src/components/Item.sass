@@ -1,0 +1,31 @@
+@import '../config.sass'
+
+.rectangle
+	display: inline-block
+	border-bottom: 5px solid $mainColor
+	width: 100%
+	.productInfo
+		padding: $sPadding
+		h4
+			font-family: 'Roboto Mono'
+			font-weight: 500
+			color: #222
+			.price
+				float: right
+				font-weight: 700
+				color: $mainColor
+	img
+		width: 100%
+		cursor: pointer
+	&:hover
+		.productInfo
+			transition: all .2s
+			border-top-left-radius: $sPadding
+			border-top-right-radius: $sPadding
+			background-color: $mainColor
+			color: #fff
+			h4
+				cursor: pointer
+				color: #fff
+				.price
+					color: #fff

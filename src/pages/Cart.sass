@@ -4,7 +4,36 @@
 	min-height: 100vh
 	background: $mainColor
 	color: #fff
-	padding: $mPadding
+	margin: 0
+	position: relative
+
+.exit
+	position: absolute
+	top: $mPadding
+	right: $mPadding
+	color: #fff
+	font-size: 150%
+	&:hover
+		color: #f0f0f0
 
 .title
 	font-family: 'Roboto Mono'
+	margin: 0
+
+.item
+	background: #fff
+	border-top: 1px #ddd solid
+	color: $mainColor
+	padding: $mPadding
+	h3
+		font-family: 'Roboto Mono'
+		margin: 0
+		display: inline-block
+		&.price
+			float: right
+
+	&:hover
+		background: #f0f0f0
+
+.container
+	padding: $mPadding

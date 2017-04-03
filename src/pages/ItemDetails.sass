@@ -8,12 +8,17 @@
 .img
 	width: 100%
 
-.fa-close
+.icons
 	position: absolute
 	top: 16px
 	right: 16px
 	cursor: pointer
 	font-size: 150%
+	.fa
+		color: #fff 
+		margin-left: $mPadding
+		&:hover
+			color: #f0f0f0
 
 .productTitle
 	font-family: 'Roboto Mono'
@@ -53,6 +58,7 @@
 		color: $mainColor
 .container
 	padding: $mPadding
+	padding-top: $lPadding !important
 
 .descriptionText
 	text-align: justify

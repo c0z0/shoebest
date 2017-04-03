@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+import { Link } from 'react-router-dom'
 
 import './ItemDetails.sass'
 
@@ -10,7 +12,14 @@ class ItemDetails extends Component {
 					<img src="http://www.u-man.ro/resources/e8c09fd9865b241a9fc593bffbe68a98/IMG_1703_lg.jpg" alt="" className="img"/>
 				</div>
 				<div className="col-md-6 col-sm-12 container bg">
-					<i className="fa fa-close"></i>
+					<div className="icons">
+						<Link to="/cart">
+							<i className="fa fa-shopping-cart"></i>
+						</Link>
+						<Link to="/">
+							<i className="fa fa-close"></i>
+						</Link>
+					</div>
 					<h3 className="productTitle">
 						Vans OldSkool <span className="price">350 RON</span>
 					</h3>

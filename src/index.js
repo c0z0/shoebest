@@ -1,6 +1,7 @@
 //packages
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import {
   BrowserRouter as Router,
   Route,
@@ -8,20 +9,24 @@ import {
 
 
 //modules
-import App from './App'
 import ItemDetails from './pages/ItemDetails'
 import ItemList from './pages/ItemList' 
 import Cart from './pages/Cart' 
-
-
+import store from './store'
+import { itemsFetchFinnish } from './actions/itemsActions'
 
 ReactDOM.render(
-  <Router>
-  	<div>
-  		<Route exact path='/' component={ItemList}/>
-  		<Route path='/details/:itemid' component={ItemDetails}/>
-  		<Route path='/cart' component={Cart}/>
-  	</div>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+    	<div>
+    		<Route exact path='/' component={ItemList}/>
+    		<Route path='/details/:itemid' component={ItemDetails}/>
+    		<Route path='/cart' component={Cart}/>
+    	</div>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
+
+
+store.dispatch(itemsFetchFinnish(require('./mock.json')))

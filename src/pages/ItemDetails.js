@@ -8,7 +8,7 @@ class ItemDetails extends Component {
 	render () {
 		return (
 			<div className="row">
-				<div className="col-md-6 col-sm-12">
+				<div className="col-md-6 col-sm-12 imageColumn">
 					<img src="http://www.u-man.ro/resources/e8c09fd9865b241a9fc593bffbe68a98/IMG_1703_lg.jpg" alt="" className="img"/>
 				</div>
 				<div className="col-md-6 col-sm-12 container bg">

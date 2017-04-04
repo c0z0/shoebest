@@ -1,14 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react' 
+import { connect } from 'react-redux'
 
-//components
 import Item from '../components/Item'
 import App from '../App'
 
-//styles
 import './ItemList.sass'
 
+@connect((store) => {
+	return {
+		...store
+	}
+})
 class ItemList extends Component {
 	render() {
+		console.log(this.props);
 		return (
 			<div>
 				<App/>

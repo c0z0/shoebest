@@ -12,7 +12,7 @@ class Item extends Component {
 						<img src="http://www.u-man.ro/resources/7aa8881640166a004a1a823dc18eede1/IMG_1723_sm.jpg" alt="Product" onClick={this.props.toggleInfo}/>
 					</Link>
 					<div className="productInfo">
-						<Link to="/details/vans">
+						<Link to="/details/vans" className="itemTitleLink">
 							<h4>Product title <span className="price">200 RON</span></h4>
 						</Link>
 					</div>

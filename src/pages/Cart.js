@@ -27,7 +27,7 @@ export default class Cart extends Component {
 const Item = (props) => (
 		<div className="item">
 			<h3>Vans Old Skool</h3>
-			<h3 className="price"><i className="fa fa-remove"></i></h3>
+			<h3 className="cartDelete"><i className="fa fa-remove"></i></h3>
 
 			<h3 className="price">350 RON</h3>
 		</div>

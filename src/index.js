@@ -15,6 +15,8 @@ import Cart from './pages/Cart'
 import store from './store'
 import { itemsFetchFinnish } from './actions/itemsActions'
 
+store.dispatch(itemsFetchFinnish(require('./mock.json')))
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
@@ -26,7 +28,4 @@ ReactDOM.render(
     </Router>
   </Provider>,
   document.getElementById('root')
-);
-
-
-store.dispatch(itemsFetchFinnish(require('./mock.json')))
+)

@@ -25,10 +25,15 @@ class ItemDetails extends Component {
 	}
 
 	addToCart() {
+		if (0 === this.state.item.stock)
+	return
 		this.props.dispatch(addToCart({
 			id: this.props.match.params.itemid,
 			quantity: this.state.quantity
 		}));
+		this.setState({
+			quantity: 1
+		})
 	}
 
 	incQuantity() {
@@ -42,7 +47,11 @@ class ItemDetails extends Component {
 	}
 
 	render () {
-		const item = this.state.item
+		const { item } = this.state
+
+		const modifyPlus = item.stock === this.state.quantity ? "modifyButton disabled" : "modifyButton"
+		const modifyMinus = this.state.quantity === 1 ? "modifyButton disabled" : "modifyButton"
+		const addToCart = item.stock  == 0 ? "buyButton disabled" : "buyButton"
 
 		return (
 			<div className="row">
@@ -52,10 +61,10 @@ class ItemDetails extends Component {
 				<div className="col-md-6 col-sm-12 container bg">
 					<div className="icons">
 						<Link to="/cart">
-							<i className="fa fa-shopping-cart"></i>
+							<i className="fa fa-shopping-cart"/>
 						</Link>
 						<Link to="/">
-							<i className="fa fa-close"></i>
+							<i className="fa fa-close"/>
 						</Link>
 					</div>
 					<h3 className="productTitle">
@@ -64,15 +73,14 @@ class ItemDetails extends Component {
 					<p className="descriptionText">
 						{item.description}
 					</p>
-					{item.stock}
-					<div className="modifyButton" onClick={this.decQuantity}>
-						<i className="fa fa-minus"></i>
-					</div>
+					<button className={modifyMinus} onClick={this.decQuantity}>
+						<i className="fa fa-minus"/>
+					</button>
 					<span className="quantity">{this.state.quantity}</span>
-					<div className="modifyButton" onClick={this.incQuantity}>
-						<i className="fa fa-plus"></i>
-					</div>
-					<div className="buyButton" onClick={this.addToCart}>Add to cart</div>
+					<button className={modifyPlus} onClick={this.incQuantity}>
+						<i className="fa fa-plus"/>
+					</button>
+					<button className={addToCart} onClick={this.addToCart}>Add to cart</button>
 				</div>
 			</div>
 		)

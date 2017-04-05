@@ -18,7 +18,7 @@ class App extends Component {
 	}
 }
 
-const TitleBar = (props) => {
+const TitleBar = () => {
 	return (
 		<div className='titleBar'>
 			<h3>Shoe Best</h3>

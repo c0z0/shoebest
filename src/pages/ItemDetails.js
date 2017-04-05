@@ -1,15 +1,53 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import _ from 'lodash'
+
+import { addToCart } from './../actions/cartActions'
 
 import './ItemDetails.sass'
-
+@connect((store) => {
+	return {
+		cart: store.cart.length,
+		items: store.items,
+	}
+})
 class ItemDetails extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			quantity: 1,
+			item: _.find(this.props.items, {id: this.props.match.params.itemid})
+		}
+		this.incQuantity = this.incQuantity.bind(this)
+		this.decQuantity = this.decQuantity.bind(this)
+		this.addToCart = this.addToCart.bind(this)
+	}
+
+	addToCart() {
+		this.props.dispatch(addToCart({
+			id: this.props.match.params.itemid,
+			quantity: this.state.quantity
+		}));
+	}
+
+	incQuantity() {
+		if (this.state.quantity < this.state.item.stock)
+			this.setState({quantity: this.state.quantity + 1})
+	}
+
+	decQuantity() {
+		if (this.state.quantity > 1)
+			this.setState({quantity: this.state.quantity - 1})
+	}
+
 	render () {
+		const item = this.state.item
+
 		return (
 			<div className="row">
 				<div className="col-md-6 col-sm-12 imageColumn">
-					<img src="http://www.u-man.ro/resources/e8c09fd9865b241a9fc593bffbe68a98/IMG_1703_lg.jpg" alt="" className="img"/>
+					<img src={item.img} alt="" className="img"/>
 				</div>
 				<div className="col-md-6 col-sm-12 container bg">
 					<div className="icons">
@@ -21,16 +59,20 @@ class ItemDetails extends Component {
 						</Link>
 					</div>
 					<h3 className="productTitle">
-						Vans OldSkool <span className="price">350 RON</span>
+						{item.title} <span className="price">{item.price} RON</span>
 					</h3>
 					<p className="descriptionText">
-						Farm-to-table crucifix scenester, vice kickstarter microdosing af pabst tacos green juice vinyl hot chicken artisan aesthetic schlitz. Whatever schlitz jianbing subway tile gastropub kitsch. Live-edge chia yr polaroid lumbersexual vice. Sustainable next level leggings cliche occupy, vinyl 90's wayfarers fam vice normcore food truck actually biodiesel YOLO. Kickstarter swag kitsch meditation twee austin affogato, master cleanse lo-fi hexagon enamel pin air plant bicycle rights vice tumblr. Gastropub cardigan cold-pressed organic, biodiesel pinterest portland forage food truck literally. Wayfarers tofu kitsch chartreuse listicle.
-
+						{item.description}
 					</p>
-					<div className="modifyButton"><i className="fa fa-minus"></i></div>
-					<span className="quantity">1</span>
-					<div className="modifyButton"><i className="fa fa-plus"></i></div>
-					<div className="buyButton">Add to cart</div>
+					{item.stock}
+					<div className="modifyButton" onClick={this.decQuantity}>
+						<i className="fa fa-minus"></i>
+					</div>
+					<span className="quantity">{this.state.quantity}</span>
+					<div className="modifyButton" onClick={this.incQuantity}>
+						<i className="fa fa-plus"></i>
+					</div>
+					<div className="buyButton" onClick={this.addToCart}>Add to cart</div>
 				</div>
 			</div>
 		)

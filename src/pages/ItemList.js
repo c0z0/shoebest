@@ -8,29 +8,23 @@ import './ItemList.sass'
 
 @connect((store) => {
 	return {
-		...store
+		items: store.items,
+		cart: store.cart.length
 	}
 })
 class ItemList extends Component {
 	render() {
-		console.log(this.props);
+		
+		const items = this.props.items.map((item) => {
+			return (<Item product={item} key={item.id}/>);
+		})
+
 		return (
 			<div>
 				<App/>
 				<div className="container">
 					<div className="row">
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
-						<Item />
+						{items}
 					</div>
 				</div>
 			</div>

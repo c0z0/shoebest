@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
+import axios from 'axios'
 
 import { addToCart } from './../actions/cartActions'
+import * as itemActions from '../actions/itemsActions'
+
 
 import './ItemDetails.sass'
 @connect((store) => {
 	return {
 		cart: store.cart.length,
 		items: store.items,
+		loading: store.loading
 	}
 })
 class ItemDetails extends Component {
@@ -17,7 +21,13 @@ class ItemDetails extends Component {
 		super(props)
 		this.state = {
 			quantity: 1,
-			item: _.find(this.props.items, {id: this.props.match.params.itemid})
+		}
+		if (! this.props.items.length) {
+			this.props.dispatch(itemActions.itemsFetchStart())
+			axios.get('/mock.json')
+				.then((res) => {
+					this.props.dispatch(itemActions.itemsFetchFinnish(res.data));
+				})
 		}
 		this.incQuantity = this.incQuantity.bind(this)
 		this.decQuantity = this.decQuantity.bind(this)
@@ -25,8 +35,10 @@ class ItemDetails extends Component {
 	}
 
 	addToCart() {
-		if (0 === this.state.item.stock)
-	return
+		const item = _.find(this.props.items, {id: this.props.match.params.itemid})
+
+		if (0 === item.stock)
+			return
 		this.props.dispatch(addToCart({
 			id: this.props.match.params.itemid,
 			quantity: this.state.quantity
@@ -37,7 +49,9 @@ class ItemDetails extends Component {
 	}
 
 	incQuantity() {
-		if (this.state.quantity < this.state.item.stock)
+		const item = _.find(this.props.items, {id: this.props.match.params.itemid})
+
+		if (this.state.quantity < item.stock)
 			this.setState({quantity: this.state.quantity + 1})
 	}
 
@@ -47,11 +61,19 @@ class ItemDetails extends Component {
 	}
 
 	render () {
-		const { item } = this.state
+		const item = _.find(this.props.items, {id: this.props.match.params.itemid})
+
+		if (!item) {
+			return (
+				<div className="bg">
+					<h3>Loading...</h3>
+				</div>
+			)
+		}
 
 		const modifyPlus = item.stock === this.state.quantity ? "modifyButton disabled" : "modifyButton"
 		const modifyMinus = this.state.quantity === 1 ? "modifyButton disabled" : "modifyButton"
-		const addToCart = item.stock  == 0 ? "buyButton disabled" : "buyButton"
+		const addToCart = item.stock  === 0 ? "buyButton disabled" : "buyButton"
 
 		return (
 			<div className="row">

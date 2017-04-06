@@ -4,3 +4,9 @@ export function itemsFetchFinnish(items) {
 		payload: items
 	}
 }
+
+export function itemsFetchStart() {
+	return {
+		type: 'ITEMS_FETCH_START'
+	}
+}

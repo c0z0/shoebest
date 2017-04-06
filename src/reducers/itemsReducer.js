@@ -15,7 +15,7 @@ export default function itemsReducer (state = [], action) {
 			break
 		}
 		case 'ITEMS_FETCH_FINNISH': {
-			state = [...action.payload.items]
+			state = [...action.payload]
 			break
 		}
 		default: {

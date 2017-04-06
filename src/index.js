@@ -13,9 +13,6 @@ import ItemDetails from './pages/ItemDetails'
 import ItemList from './pages/ItemList' 
 import Cart from './pages/Cart' 
 import store from './store'
-import { itemsFetchFinnish } from './actions/itemsActions'
-
-store.dispatch(itemsFetchFinnish(require('./mock.json')))
 
 ReactDOM.render(
   <Provider store={store}>

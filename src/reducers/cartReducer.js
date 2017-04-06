@@ -3,7 +3,12 @@ import _ from 'lodash'
 export default function cartReducer (state = [], action) {
 	switch (action.type) {
 		case "CART_ADD": {
-			state = [...state, action.payload]
+			state = [...state]
+			const index = _.findIndex(state, {id: action.payload.id})
+			if (index !== -1)
+				state[index].quantity += action.payload.quantity
+			else
+				state.push(action.payload)
 			break
 		}
 		case 'CART_REMOVE': {

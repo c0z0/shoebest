@@ -1,0 +1,26 @@
+@import "../config"
+
+.buttons
+	text-align: right
+
+.modifyButtonCart
+	margin-right: $mPadding
+	display: inline-block
+	color: #fff
+	background: $mainColor
+	padding: $sPadding
+	cursor: pointer
+	border-radius: $sPadding
+	border: 2px solid $mainColor
+	transition: all .2s
+	&:hover
+		background: darken($mainColor, 10)
+		color: #fff
+		border-color: darken($mainColor, 10)
+	&.disabled
+		opacity: .4
+		cursor: default
+		background: none
+		&:hover
+			background: none
+	  		color: #fff

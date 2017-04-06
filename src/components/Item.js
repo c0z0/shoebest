@@ -7,7 +7,7 @@ class Item extends Component {
 	render() {
 
 		return (
-			<div className="col-md-3 col-sm-4 col-xs-12">
+			<div className="col-sm-4 col-xs-12">
 				<div className="rectangle">
 					<Link to={'/details/' + this.props.product.id}>
 						<img src={this.props.product.img} alt="Product"/>

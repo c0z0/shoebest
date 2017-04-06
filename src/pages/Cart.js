@@ -25,6 +25,8 @@ export default class Cart extends Component {
 					this.props.dispatch(itemActions.itemsFetchFinnish(res.data))
 				})
 		}
+
+		this.calculateTotal = this.calculateTotal.bind(this)
 	}
 
 	removeFromCart(id, quantity) {
@@ -34,10 +36,39 @@ export default class Cart extends Component {
 		}))
 	}
 
+	calculateTotal() {
+		let total = 0
+		this.props.cart.forEach((cartItem) => {
+			let item = _.find(this.props.items, {id: cartItem.id})
+			total += item.price * cartItem.quantity
+		})
+		return total
+	}
+
+	onIncToCart(id) {
+		this.props.dispatch(cartActions.addToCart({
+			id,
+			quantity: 1
+		}))
+	}
+
+	onDecToCart(id) {
+		this.props.dispatch(cartActions.removeFromCart({
+			id,
+			quantity: 1
+		}))
+	}
+
 	render() {
 		let items = this.props.cart.map((cartItem) => {
 			const item = _.find(this.props.items, {id: cartItem.id})
-			return (<CartItem item={item} quantity={cartItem.quantity} key={item.id} onRemove={this.removeFromCart.bind(this)}/>)
+			return (<CartItem
+						item={item}
+						quantity={cartItem.quantity}
+						key={item.id}
+						onRemove={this.removeFromCart.bind(this)}
+						onIncToCart={this.onIncToCart.bind(this)}
+						onDecToCart={this.onDecToCart.bind(this)}/>)
 		})
 
 		if (items.length === 0)
@@ -57,6 +88,9 @@ export default class Cart extends Component {
 				</div>
 				<div className="items">
 					{ items }
+					<div className="item total">
+						<h3 className="">Total: {this.calculateTotal()} RON</h3>
+					</div>
 				</div>
 			</div>
 			);

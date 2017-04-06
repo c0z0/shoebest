@@ -4,9 +4,12 @@ export default function loadingReducer(state=false, action) {
 			return true
 
 		}
-		case 'ITEMS_FETCH_START': {
+		case 'ITEMS_FETCH_FINNISH': {
+			return false
+		}
+		default: {
 			return false
 		}
 	}
-	return false
+
 }

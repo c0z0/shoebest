@@ -20,7 +20,13 @@
 	&.disabled
 		opacity: .4
 		cursor: default
+		color: $mainColor
 		background: none
 		&:hover
-			background: none
-	  		color: #fff
+			background: none !important
+	  		color: $mainColor
+
+.toItemLink
+	color: $mainColor
+	&:hover
+		color: darken($mainColor, 10)

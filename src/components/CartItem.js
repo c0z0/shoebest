@@ -7,7 +7,7 @@ export default class CartItem extends Component {
 	constructor() {
 		super();
 		this.state = {
-			optionsActive: true
+			optionsActive: false
 		}
 	}
 
@@ -20,25 +20,29 @@ export default class CartItem extends Component {
 	}
 
 	incToCart() {
-
+		if (this.props.item.stock > 0)
+			this.props.onIncToCart(this.props.item.id)
 	}
 
-	decToCart() {
 
+	decToCart() {
+		if (this.props.quantity > 0)
+			this.props.onDecToCart(this.props.item.id)
 	}
 
 	render () {
 		const { item, quantity } = this.props
+		const increaseClass = item.stock !== 0 ? "modifyButtonCart" : "modifyButtonCart disabled"
 		const itemActions = this.state.optionsActive ? (
 				<div className="item">
 						<p>
 							{ item.description }
 						</p>
 						<div className="buttons">
-							<button className="modifyButtonCart">
+							<button className="modifyButtonCart" onClick={this.decToCart.bind(this)}>
 								<i className="fa fa-minus"/>
 							</button>
-							<button className="modifyButtonCart">
+							<button className={increaseClass} onClick={this.incToCart.bind(this)}>
 								<i className="fa fa-plus"/>
 							</button>
 						</div>
@@ -49,7 +53,7 @@ export default class CartItem extends Component {
 		return (
 			<div>
 			<div className="item">
-				<Link to={'/details/' + item.id}>
+				<Link to={'/details/' + item.id} className="toItemLink">
 					<h3>{item.title}</h3>
 				</Link>
 				<h3 className="cartDelete" onClick={this.toggleOptions.bind(this)}>
@@ -70,6 +74,7 @@ CartItem.propTypes = {
 	item: React.PropTypes.shape({
 		title: React.PropTypes.string.isRequired,
 		description: React.PropTypes.string.isRequired,
+		stock: React.PropTypes.number.isRequired
 	}),
 	quantity: React.PropTypes.number.isRequired,
 	onRemove: React.PropTypes.func.isRequired

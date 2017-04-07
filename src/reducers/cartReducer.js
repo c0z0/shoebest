@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Cookie from 'js-cookie'
 
 export default function cartReducer (state = [], action) {
 	switch (action.type) {
@@ -9,6 +10,7 @@ export default function cartReducer (state = [], action) {
 				state[index].quantity += action.payload.quantity
 			else
 				state.push(action.payload)
+			Cookie.set('cart', state)
 			break
 		}
 		case 'CART_REMOVE': {
@@ -17,7 +19,11 @@ export default function cartReducer (state = [], action) {
 			state[index].quantity -= action.payload.quantity
 			if (state[index].quantity === 0)
 				_.remove(state, {id: action.payload.id})
+			Cookie.set('cart', state)
 			break
+		}
+		case 'READ_FROM_COOKIE': {
+			state = [...action.payload]
 		}
 		default: {
 			break

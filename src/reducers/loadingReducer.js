@@ -11,5 +11,4 @@ export default function loadingReducer(state=false, action) {
 			return false
 		}
 	}
-
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import axios from 'axios'
+import Cookie from 'js-cookie'
 
 import * as cartActions from '../actions/cartActions'
 import * as itemActions from '../actions/itemsActions'
@@ -24,6 +25,12 @@ export default class Cart extends Component {
 				.then((res) => {
 					this.props.dispatch(itemActions.itemsFetchFinnish(res.data))
 				})
+		}
+
+		const cookieCart = Cookie.getJSON('cart');
+
+		if (!this.props.cart.length && cookieCart) {
+			this.props.dispatch(cartActions.readFromCookie(cookieCart))
 		}
 
 		this.calculateTotal = this.calculateTotal.bind(this)
@@ -76,7 +83,11 @@ export default class Cart extends Component {
 						<h3>
 							Your cart is empty.
 						</h3>
-					</div>);
+					</div>)
+		else
+			items.push(<div className="item total">
+							<h3 className="">Total: {this.calculateTotal()} RON</h3>
+						</div>)
 
 		return (
 			<div className="cart">
@@ -88,9 +99,6 @@ export default class Cart extends Component {
 				</div>
 				<div className="items">
 					{ items }
-					<div className="item total">
-						<h3 className="">Total: {this.calculateTotal()} RON</h3>
-					</div>
 				</div>
 			</div>
 			);

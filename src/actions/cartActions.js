@@ -11,3 +11,10 @@ export function removeFromCart(payload) {
 		payload
 	}
 }
+
+export function readFromCookie(payload) {
+	return {
+		type: 'READ_FROM_COOKIE',
+		payload
+	}
+}

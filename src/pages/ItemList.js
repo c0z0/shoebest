@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import * as itemActions from '../actions/itemsActions'
 import Item from '../components/Item'
-import App from '../App'
+import TitleBar from '../components/TitleBar'
 
 import './ItemList.sass'
 
@@ -32,7 +32,7 @@ class ItemList extends Component {
 
 		return (
 			<div>
-				<App/>
+				<TitleBar/>
 				<div className="container">
 					<div className="row">
 						{items}

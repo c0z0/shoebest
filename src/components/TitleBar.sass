@@ -1,4 +1,4 @@
-@import './config.sass'
+@import '../config'
 
 body
 	font-family: 'Open Sans', sans-serif
@@ -6,8 +6,8 @@ body
 	margin: 0
 
 .titleBar
-	background-color: #fff
-	color: $mainColor
+	background-color: $mainColor
+	color: #fff
 	font-family: 'Roboto Mono'
 	text-align: center
 	padding: $sPadding
@@ -24,4 +24,13 @@ body
 		color: #fff
 	@media only screen and (min-width : 320px) and (max-width : 480px)
 		margin: 0 $sPadding
+	.linkToCart
+		float: right
+		color: #fff !important
+		margin-right: 8px
+		&:hover
+			color: #ddd !important
+			text-decoration: none
+
+
 

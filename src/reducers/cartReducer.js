@@ -24,6 +24,7 @@ export default function cartReducer (state = [], action) {
 		}
 		case 'READ_FROM_COOKIE': {
 			state = [...action.payload]
+			break
 		}
 		default: {
 			break

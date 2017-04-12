@@ -12,6 +12,19 @@ describe('cart reducer', () => {
 		}
 	]
 
+	beforeEach(() => {
+		mockState = [
+		{
+			id: 'abc',
+			quantity: 2
+		},
+		{
+			id: 'not affected',
+			quantity: 5
+		}
+	]
+	})
+
 	it('return an empty array', () => {
 		expect(cartReducer([],{})).toEqual([])
 	})
@@ -43,7 +56,7 @@ describe('cart reducer', () => {
 			type: 'CART_ADD',
 			payload: {
 				id: 'abc',
-				quantity: 5
+				quantity: 3
 			}
 		})).toEqual([
 		{
@@ -55,5 +68,6 @@ describe('cart reducer', () => {
 			quantity: 5
 		}
 	])
-	})
+})
+
 })
